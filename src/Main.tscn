@@ -2,7 +2,7 @@
 
 [ext_resource path="res://icon.png" type="Texture" id=1]
 [ext_resource path="res://Submarine.gd" type="Script" id=2]
-[ext_resource path="res://RockFormation.gd" type="Script" id=3]
+[ext_resource path="res://nodes/RockFormation.tscn" type="PackedScene" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 32, 32 )
@@ -25,27 +25,14 @@ smoothing_enabled = true
 
 [node name="Environment" type="Node2D" parent="."]
 
-[node name="RockFormation" type="StaticBody2D" parent="Environment"]
-script = ExtResource( 3 )
-__meta__ = {
-"_edit_group_": true
-}
+[node name="RockFormation" parent="Environment" instance=ExtResource( 3 )]
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Environment/RockFormation"]
-polygon = PoolVector2Array( 541.273, -117.826, 584.404, 253.579, 688.011, 281.639, 959.978, 326.967, 2397.92, 957.375, 5275.81, 731.531, 5471.49, 1337.36, 5838.43, 3372.18, 7432.93, 2611.62, 7013.21, 33.5572, 5444, -92.5975, 1235.05, -117.826, 810.376, -122.03 )
-
-[node name="Polygon2D" type="Polygon2D" parent="Environment/RockFormation"]
-color = Color( 0.203922, 0.203922, 0.203922, 1 )
-
-[node name="RockFormation2" type="StaticBody2D" parent="Environment"]
+[node name="RockFormation2" parent="Environment" instance=ExtResource( 3 )]
 position = Vector2( -219.186, 551.391 )
-script = ExtResource( 3 )
-__meta__ = {
-"_edit_group_": true
-}
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Environment/RockFormation2"]
+[node name="CollisionPolygon2D" parent="Environment/RockFormation2" index="0"]
 polygon = PoolVector2Array( 649.158, 85.2186, 584.404, 253.579, 403.056, 1298.6, 1626.64, 1756.92, 5146, 2681.96, 5183.84, 1311.22, 5129.18, 508.11, 2397.92, 957.375, 1270.8, 65.7923, 895.224, 55 )
 
-[node name="Polygon2D" type="Polygon2D" parent="Environment/RockFormation2"]
-color = Color( 0.203922, 0.203922, 0.203922, 1 )
+[editable path="Environment/RockFormation"]
+
+[editable path="Environment/RockFormation2"]
