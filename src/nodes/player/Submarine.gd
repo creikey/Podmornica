@@ -1,4 +1,4 @@
-extends KinematicBody2D
+extends RigidBody2D
 
 const player_state = preload("res://player_state.tres")
 
@@ -25,11 +25,15 @@ func _process(delta):
 
 func _physics_process(delta):
 	
-	accel = player_state.controls
+	applied_force = player_state.controls
 	
-	vel += accel*delta
-
-	vel = move_and_slide(vel)
-
-	vel.x = clamp(vel.x, -max_horizontal_velocity, max_horizontal_velocity)
-	vel.y = clamp(vel.y, -max_vertical_velocity, max_vertical_velocity)
+	# terminal_velocity
+	applied_force.x += -applied_force.x*abs(linear_velocity.x/max_horizontal_velocity)
+	applied_force.y += -applied_force.y*abs(linear_velocity.y/max_vertical_velocity)
+	
+#	vel += accel*delta
+#
+#	vel = move_and_slide(vel)
+#
+#	vel.x = clamp(vel.x, -max_horizontal_velocity, max_horizontal_velocity)
+#	vel.y = clamp(vel.y, -max_vertical_velocity, max_vertical_velocity)
