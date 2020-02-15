@@ -6,5 +6,9 @@ func _input(event):
 	if event.is_action_pressed("g_toggle_controls"):
 		if player_state.energy <= 1.0:
 			return
-		visible = !visible
-		player_state.viewing_controls = visible
+		player_state.viewing_controls = !player_state.viewing_controls
+
+func _process(delta):
+	visible = player_state.viewing_controls
+	if player_state.energy <= 1.0:
+		player_state.viewing_controls = true
