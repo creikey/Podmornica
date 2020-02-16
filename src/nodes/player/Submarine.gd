@@ -44,11 +44,13 @@ func _physics_process(delta):
 	vel = move_and_slide(vel)
 
 	for i in range(get_slide_count()):
-		var intensity: float = get_slide_collision(i).remainder.length()
-		if intensity >= 1.3 and $LastCrashTimer.is_stopped():
+		var intensity: float = get_slide_collision(i).travel.length()
+		if intensity >= 2.3 and $LastCrashTimer.is_stopped():
 			$LastCrashTimer.start()
 			
 			player_state.health -= intensity*5.0
+			
+			vel = get_slide_collision(i).normal.normalized()*vel.length()
 			
 			$MultiPlayer.play(crashes[randi()%crashes.size()])
 
