@@ -2,6 +2,14 @@ extends KinematicBody2D
 
 const player_state = preload("res://player_state.tres")
 
+const crashes = [
+	"res://nodes/player/crashes/1.wav",
+	"res://nodes/player/crashes/2.wav",
+	"res://nodes/player/crashes/3.wav",
+	"res://nodes/player/crashes/4.wav",
+	"res://nodes/player/crashes/5.wav",
+]
+
 const energy_rate_nothrust = 5.0
 const energy_rate_thrust = -1.0
 const energy_rate_viewing = -10.0
@@ -12,6 +20,9 @@ const max_vertical_velocity = 400.0
 var accel: Vector2 = Vector2()
 var vel: Vector2 = Vector2()
 
+func _ready():
+	randomize()
+
 func _process(delta):
 	var cur_energy_rate: float = energy_rate_nothrust
 	
@@ -21,7 +32,8 @@ func _process(delta):
 	if not player_state.viewing_controls:
 		cur_energy_rate = energy_rate_viewing
 	
-	player_state.energy += cur_energy_rate*delta
+#	player_state.energy += cur_energy_rate*delta
+	player_state.energy = clamp(player_state.energy, 0.0, 100.0)
 
 func _physics_process(delta):
 	
@@ -30,6 +42,15 @@ func _physics_process(delta):
 	vel += accel*delta
 
 	vel = move_and_slide(vel)
+
+	for i in range(get_slide_count()):
+		var intensity: float = get_slide_collision(i).remainder.length()
+		if intensity >= 1.3 and $LastCrashTimer.is_stopped():
+			$LastCrashTimer.start()
+			
+			player_state.health -= intensity*5.0
+			
+			$MultiPlayer.play(crashes[randi()%crashes.size()])
 
 	vel.x = clamp(vel.x, -max_horizontal_velocity, max_horizontal_velocity)
 	vel.y = clamp(vel.y, -max_vertical_velocity, max_vertical_velocity)
