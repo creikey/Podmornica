@@ -39,13 +39,18 @@ func _physics_process(delta):
 	
 	accel = player_state.controls
 	
+	if accel.x > 0.0:
+		$Sprite.flip_h = false
+	if accel.x < 0.0:
+		$Sprite.flip_h = true
+	
 	vel += accel*delta
 
 	vel = move_and_slide(vel)
 
 	for i in range(get_slide_count()):
 		var intensity: float = get_slide_collision(i).travel.length()
-		if intensity >= 2.3 and $LastCrashTimer.is_stopped():
+		if intensity >= 1.2 and $LastCrashTimer.is_stopped():
 			$LastCrashTimer.start()
 			
 			player_state.health -= intensity*5.0
