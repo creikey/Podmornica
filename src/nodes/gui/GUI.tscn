@@ -8,6 +8,7 @@
 [ext_resource path="res://nodes/gui/sprites/Wheel.png" type="Texture" id=6]
 
 [node name="GUI" type="Node2D"]
+visible = false
 
 [node name="BackPanel" type="Sprite" parent="."]
 scale = Vector2( 4, 4 )

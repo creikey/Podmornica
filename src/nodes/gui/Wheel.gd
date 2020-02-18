@@ -16,7 +16,7 @@ func _process(delta):
 		return
 	
 	if selected:
-		target_rotation = global_position.angle_to_point(get_global_mouse_position()) - PI/2.0
+		target_rotation = position.angle_to_point(get_viewport().get_mouse_position()) - PI/2.0
 		target_rotation = clamp(target_rotation, -deg2rad(angle_range), deg2rad(angle_range))
 		
 		if abs(target_rotation) < deg2rad(snap_range):

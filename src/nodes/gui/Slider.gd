@@ -21,7 +21,7 @@ func _process(delta):
 		return
 	
 	if selected:
-		target_y_pos = get_global_mouse_position().y
+		target_y_pos = get_viewport().get_mouse_position().y
 		target_y_pos = clamp(target_y_pos, y_range.x, y_range.y)
 		
 		if abs(target_y_pos - middle_y_pos) <= snap_tolerance:
@@ -30,7 +30,7 @@ func _process(delta):
 
 func _input(event):
 	if event.is_action_pressed("g_click"):
-		if get_clickable_rect().has_point(to_local(event.global_position)):
+		if get_clickable_rect().has_point(event.position - position):
 			selected = true
 	elif event.is_action_released("g_click"):
 		selected = false
