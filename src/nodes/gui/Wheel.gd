@@ -1,7 +1,8 @@
 tool
 extends Node2D
 
-const turn_smoothing = 15.0
+const turn_smoothing = 25.0
+const snap_range = 10.0
 const angle_range = 60.0
 
 export var select_radius: float = 100.0
@@ -17,6 +18,9 @@ func _process(delta):
 	if selected:
 		target_rotation = global_position.angle_to_point(get_global_mouse_position()) - PI/2.0
 		target_rotation = clamp(target_rotation, -deg2rad(angle_range), deg2rad(angle_range))
+		
+		if abs(target_rotation) < deg2rad(snap_range):
+			target_rotation = 0.0
 
 	# global_position.y = ((target_y_pos - global_position.y) * move_smoothing * delta) + global_position.y
 	rotation = ((target_rotation - rotation) * turn_smoothing * delta) + rotation
