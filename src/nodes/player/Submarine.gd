@@ -37,17 +37,20 @@ func _process(delta):
 
 func _physics_process(delta):
 	
-	accel = player_state.controls
+	accel = player_state.controls * 2.0
 	
 	if accel.x > 0.0:
 		$Sprite.flip_h = false
+		$CollisionPolygon2D.scale.x = 1.0
 	if accel.x < 0.0:
 		$Sprite.flip_h = true
+		$CollisionPolygon2D.scale.x = -1.0
 	
 	vel += accel*delta
 
 	vel = move_and_slide(vel)
 
+	# crash detection
 	for i in range(get_slide_count()):
 		var intensity: float = get_slide_collision(i).travel.length()
 		if intensity >= 1.2 and $LastCrashTimer.is_stopped():
