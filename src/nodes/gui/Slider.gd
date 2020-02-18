@@ -1,28 +1,32 @@
 tool
 extends Node2D
 
-const snap_tolerance = 100.0
+const snap_tolerance = 50.0
 const move_smoothing = 9.0
 
 export (Vector2) var clickable_area_extents
 export (Vector2) var y_range = Vector2(200.0, 600.0)
 
 var selected: bool = false
-onready var target_y_pos: float = y_range.x
+onready var middle_y_pos = y_range.x + (y_range.y - y_range.x)/2.0
+onready var target_y_pos: float = middle_y_pos
+
+func _ready():
+	if not Engine.editor_hint:
+		global_position.y = target_y_pos
 
 func _process(delta):
 	if Engine.editor_hint:
 		update()
+		return
 	
 	if selected:
 		target_y_pos = get_global_mouse_position().y
 		target_y_pos = clamp(target_y_pos, y_range.x, y_range.y)
 		
-		var snap_y_pos: float = y_range.x + (y_range.y - y_range.x)/2.0
-		if abs(target_y_pos - snap_y_pos) <= snap_tolerance:
-			target_y_pos = snap_y_pos
-		
-		global_position.y = ((target_y_pos - global_position.y) * move_smoothing * delta) + global_position.y
+		if abs(target_y_pos - middle_y_pos) <= snap_tolerance:
+			target_y_pos = middle_y_pos
+	global_position.y = ((target_y_pos - global_position.y) * move_smoothing * delta) + global_position.y
 
 func _input(event):
 	if event.is_action_pressed("g_click"):

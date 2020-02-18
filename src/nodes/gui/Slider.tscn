@@ -9,7 +9,7 @@ script = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true
 }
-clickable_area_extents = Vector2( 364, 64 )
+clickable_area_extents = Vector2( 380, 90 )
 y_range = Vector2( 450, 1020 )
 
 [node name="Sprite" type="Sprite" parent="."]

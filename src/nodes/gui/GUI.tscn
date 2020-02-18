@@ -24,4 +24,8 @@ scale = Vector2( 4, 4 )
 texture = ExtResource( 2 )
 centered = false
 
-[node name="Slider" parent="." instance=ExtResource( 4 )]
+[node name="LeftSlider" parent="." instance=ExtResource( 4 )]
+position = Vector2( 210.476, 480 )
+
+[node name="RightSlider" parent="." instance=ExtResource( 4 )]
+position = Vector2( 1336.13, 480 )
