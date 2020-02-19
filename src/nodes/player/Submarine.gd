@@ -32,7 +32,7 @@ func _process(delta):
 	if not player_state.viewing_controls:
 		cur_energy_rate = energy_rate_viewing
 	
-#	player_state.energy += cur_energy_rate*delta
+	player_state.energy += cur_energy_rate*delta
 	player_state.energy = clamp(player_state.energy, 0.0, 100.0)
 
 func _physics_process(delta):

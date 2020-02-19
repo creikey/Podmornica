@@ -11,6 +11,9 @@ var selected: bool = false
 var target_rotation: float = 0.0
 
 func _process(delta):
+	if not is_visible_in_tree():
+		return
+		
 	if Engine.editor_hint:
 		update()
 		return
@@ -26,6 +29,9 @@ func _process(delta):
 	rotation = ((target_rotation - rotation) * turn_smoothing * delta) + rotation
 
 func _input(event):
+	if not is_visible_in_tree():
+		return
+		
 	if event.is_action_pressed("g_click"):
 		if global_position.distance_to(get_global_mouse_position()) <= select_radius:
 			selected = true

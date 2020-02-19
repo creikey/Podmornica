@@ -16,9 +16,13 @@ func _ready():
 		global_position.y = target_y_pos
 
 func _process(delta):
+	if not is_visible_in_tree():
+		return
+
 	if Engine.editor_hint:
 		update()
 		return
+		
 	
 	if selected:
 		target_y_pos = get_viewport().get_mouse_position().y
@@ -29,6 +33,9 @@ func _process(delta):
 	global_position.y = ((target_y_pos - global_position.y) * move_smoothing * delta) + global_position.y
 
 func _input(event):
+	if not is_visible_in_tree():
+		return
+
 	if event.is_action_pressed("g_click"):
 		if get_clickable_rect().has_point(event.position - position):
 			selected = true

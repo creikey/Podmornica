@@ -308,6 +308,7 @@ __meta__ = {
 }
 
 [node name="GUI" parent="UI" instance=ExtResource( 4 )]
+visible = true
 
 [node name="Ambience" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 8 )
