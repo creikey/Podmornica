@@ -14,6 +14,7 @@ const energy_rate_nothrust = 5.0
 const energy_rate_thrust = -1.0
 const energy_rate_viewing = -10.0
 
+const rotation_smoothing = 8.0
 const max_horizontal_velocity = 400.0
 const max_vertical_velocity = 400.0
 
@@ -37,7 +38,11 @@ func _process(delta):
 
 func _physics_process(delta):
 	
-	accel = player_state.controls * 2.0
+	rotation = ((player_state.rotation_controls*deg2rad(30.0) - rotation) * rotation_smoothing * delta) + rotation
+	
+	accel = player_state.controls * 50.0
+	
+	accel = accel.rotated(rotation)
 	
 	if accel.x > 0.0:
 		$Sprite.flip_h = false

@@ -11,6 +11,8 @@ var selected: bool = false
 onready var middle_y_pos = y_range.x + (y_range.y - y_range.x)/2.0
 onready var target_y_pos: float = middle_y_pos
 
+var value: float = 0.0
+
 func _ready():
 	if not Engine.editor_hint:
 		global_position.y = target_y_pos
@@ -31,6 +33,10 @@ func _process(delta):
 		if abs(target_y_pos - middle_y_pos) <= snap_tolerance:
 			target_y_pos = middle_y_pos
 	global_position.y = ((target_y_pos - global_position.y) * move_smoothing * delta) + global_position.y
+
+	value = (global_position.y - y_range.x) / ((y_range.y - y_range.x)/2.0)
+	value -= 1.0
+	value *= -1.0
 
 func _input(event):
 	if not is_visible_in_tree():

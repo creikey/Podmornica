@@ -9,6 +9,7 @@ export var select_radius: float = 100.0
 
 var selected: bool = false
 var target_rotation: float = 0.0
+var value: float = 0.0
 
 func _process(delta):
 	if not is_visible_in_tree():
@@ -24,6 +25,8 @@ func _process(delta):
 		
 		if abs(target_rotation) < deg2rad(snap_range):
 			target_rotation = 0.0
+
+	value = rotation_degrees/angle_range
 
 	# global_position.y = ((target_y_pos - global_position.y) * move_smoothing * delta) + global_position.y
 	rotation = ((target_rotation - rotation) * turn_smoothing * delta) + rotation
