@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://nodes/gui/sprites/Backpanel.png" type="Texture" id=1]
 [ext_resource path="res://nodes/gui/sprites/Buttons_Levers.png" type="Texture" id=2]
@@ -7,9 +7,11 @@
 [ext_resource path="res://nodes/gui/Wheel.gd" type="Script" id=5]
 [ext_resource path="res://nodes/gui/sprites/Wheel.png" type="Texture" id=6]
 [ext_resource path="res://nodes/gui/GUI.gd" type="Script" id=7]
+[ext_resource path="res://nodes/gui/sprites/Sub_Screen.png" type="Texture" id=8]
+[ext_resource path="res://nodes/gui/sprites/VCR_Flicker.png" type="Texture" id=9]
+[ext_resource path="res://nodes/gui/sprites/Screens.png" type="Texture" id=10]
 
 [node name="GUI" type="Node2D"]
-visible = false
 script = ExtResource( 7 )
 
 [node name="BackPanel" type="Sprite" parent="."]
@@ -50,3 +52,21 @@ texture = ExtResource( 6 )
 offset = Vector2( 0, -4 )
 region_enabled = true
 region_rect = Rect2( 100, 90, 190, 180 )
+
+[node name="MainDisplayFrame" type="Sprite" parent="."]
+position = Vector2( 472.121, 10.9654 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 10 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 118, 3, 247, 76 )
+
+[node name="Sub_Screen" type="Sprite" parent="."]
+scale = Vector2( 4, 4 )
+texture = ExtResource( 8 )
+centered = false
+
+[node name="VCR_Flicker" type="Sprite" parent="."]
+scale = Vector2( 4, 4 )
+texture = ExtResource( 9 )
+centered = false
