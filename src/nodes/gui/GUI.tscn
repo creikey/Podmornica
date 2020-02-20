@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://nodes/gui/sprites/Backpanel.png" type="Texture" id=1]
 [ext_resource path="res://nodes/gui/sprites/Buttons_Levers.png" type="Texture" id=2]
@@ -10,6 +10,20 @@
 [ext_resource path="res://nodes/gui/sprites/Sub_Screen.png" type="Texture" id=8]
 [ext_resource path="res://nodes/gui/sprites/VCR_Flicker.png" type="Texture" id=9]
 [ext_resource path="res://nodes/gui/sprites/Screens.png" type="Texture" id=10]
+[ext_resource path="res://nodes/gui/sprites/Bubbles.png" type="Texture" id=11]
+[ext_resource path="res://nodes/gui/sprites/main-flicker.png" type="Texture" id=12]
+[ext_resource path="res://nodes/gui/Flicker.gd" type="Script" id=13]
+[ext_resource path="res://controlpanel-theme.tres" type="Theme" id=14]
+[ext_resource path="res://media/game over.ttf" type="DynamicFontData" id=15]
+[ext_resource path="res://nodes/gui/HealthBar.gd" type="Script" id=16]
+[ext_resource path="res://nodes/gui/EnergyBar.gd" type="Script" id=17]
+[ext_resource path="res://nodes/gui/SubmarineDisplay.gd" type="Script" id=18]
+
+[sub_resource type="DynamicFont" id=2]
+size = 46
+font_data = ExtResource( 15 )
+
+[sub_resource type="OpenSimplexNoise" id=3]
 
 [node name="GUI" type="Node2D"]
 script = ExtResource( 7 )
@@ -53,7 +67,48 @@ offset = Vector2( 0, -4 )
 region_enabled = true
 region_rect = Rect2( 100, 90, 190, 180 )
 
-[node name="MainDisplayFrame" type="Sprite" parent="."]
+[node name="VCR_Flicker" type="Sprite" parent="."]
+visible = false
+scale = Vector2( 4, 4 )
+texture = ExtResource( 9 )
+centered = false
+
+[node name="Bubbles" type="Sprite" parent="."]
+scale = Vector2( 4, 4 )
+texture = ExtResource( 11 )
+centered = false
+
+[node name="ThrustLabel" type="Label" parent="."]
+margin_left = 155.912
+margin_top = 381.803
+margin_right = 275.912
+margin_bottom = 410.803
+theme = ExtResource( 14 )
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0.689026, 0.724922, 0.828125, 1 )
+text = "THRUST"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DepthLabel" type="Label" parent="."]
+margin_left = 1279.5
+margin_top = 386.168
+margin_right = 1399.5
+margin_bottom = 415.168
+theme = ExtResource( 14 )
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0.689026, 0.724922, 0.828125, 1 )
+text = "DEPTH"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MainPanel" type="Node2D" parent="."]
+
+[node name="MainDisplayFrame" type="Sprite" parent="MainPanel"]
 position = Vector2( 472.121, 10.9654 )
 scale = Vector2( 4, 4 )
 texture = ExtResource( 10 )
@@ -61,12 +116,69 @@ centered = false
 region_enabled = true
 region_rect = Rect2( 118, 3, 247, 76 )
 
-[node name="Sub_Screen" type="Sprite" parent="."]
+[node name="SubmarineDisplay" type="Sprite" parent="MainPanel"]
+position = Vector2( 977, 170 )
+rotation = 0.010472
 scale = Vector2( 4, 4 )
 texture = ExtResource( 8 )
 centered = false
+offset = Vector2( -244.111, -44.4248 )
+script = ExtResource( 18 )
+bob_noise = SubResource( 3 )
 
-[node name="VCR_Flicker" type="Sprite" parent="."]
+[node name="HealthLabel" type="Label" parent="MainPanel"]
+margin_left = 498.0
+margin_top = 53.409
+margin_right = 574.0
+margin_bottom = 70.409
+theme = ExtResource( 14 )
+text = "HEALTH:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HealthBar" type="ProgressBar" parent="MainPanel"]
+margin_left = 579.0
+margin_top = 47.0
+margin_right = 780.0
+margin_bottom = 76.0
+theme = ExtResource( 14 )
+value = 50.0
+percent_visible = false
+script = ExtResource( 16 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="EnergyLabel" type="Label" parent="MainPanel"]
+margin_left = 498.0
+margin_top = 105.979
+margin_right = 580.0
+margin_bottom = 122.979
+theme = ExtResource( 14 )
+text = "ENERGY:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="EnergyBar" type="ProgressBar" parent="MainPanel"]
+margin_left = 579.0
+margin_top = 100.0
+margin_right = 780.0
+margin_bottom = 129.0
+theme = ExtResource( 14 )
+value = 50.0
+percent_visible = false
+script = ExtResource( 17 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MainDisplayFlicker" type="Sprite" parent="MainPanel"]
+modulate = Color( 1, 1, 1, 0.415686 )
+position = Vector2( 966, 161 )
 scale = Vector2( 4, 4 )
-texture = ExtResource( 9 )
-centered = false
+texture = ExtResource( 12 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 237, 63 )
+script = ExtResource( 13 )

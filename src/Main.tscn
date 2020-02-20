@@ -248,6 +248,7 @@ shadow_filter_smooth = 8.8
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="ShipEnergyDisplay" type="HBoxContainer" parent="UI"]
+visible = false
 margin_left = 59.4837
 margin_top = 41.9886
 margin_right = 758.484
@@ -278,6 +279,7 @@ __meta__ = {
 }
 
 [node name="ShipHealthDisplay" type="HBoxContainer" parent="UI"]
+visible = false
 margin_left = 1175.15
 margin_top = 31.3885
 margin_right = 1874.15
@@ -308,7 +310,6 @@ __meta__ = {
 }
 
 [node name="GUI" parent="UI" instance=ExtResource( 4 )]
-visible = true
 
 [node name="Ambience" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 8 )

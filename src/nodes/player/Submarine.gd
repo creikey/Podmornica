@@ -40,16 +40,18 @@ func _physics_process(delta):
 	
 	rotation = ((player_state.rotation_controls*deg2rad(30.0) - rotation) * rotation_smoothing * delta) + rotation
 	
+	player_state.rotation = rotation
+	
 	accel = player_state.controls * 50.0
 	
 	accel = accel.rotated(rotation)
 	
-	if accel.x > 0.0:
-		$Sprite.flip_h = false
-		$CollisionPolygon2D.scale.x = 1.0
-	if accel.x < 0.0:
-		$Sprite.flip_h = true
-		$CollisionPolygon2D.scale.x = -1.0
+#	if accel.x > 0.0:
+#		$Sprite.flip_h = false
+#		$CollisionPolygon2D.scale.x = 1.0
+#	if accel.x < 0.0:
+#		$Sprite.flip_h = true
+#		$CollisionPolygon2D.scale.x = -1.0
 	
 	vel += accel*delta
 
