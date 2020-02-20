@@ -51,10 +51,10 @@ centered = false
 position = Vector2( 210.476, 480 )
 
 [node name="RightSlider" parent="." instance=ExtResource( 4 )]
-position = Vector2( 1336.13, 480 )
+position = Vector2( 1705.86, 480 )
 
 [node name="Wheel" type="Node2D" parent="."]
-position = Vector2( 780.731, 718.029 )
+position = Vector2( 957.525, 731.534 )
 script = ExtResource( 5 )
 __meta__ = {
 "_edit_group_": true
@@ -90,10 +90,10 @@ __meta__ = {
 }
 
 [node name="DepthLabel" type="Label" parent="."]
-margin_left = 1279.5
-margin_top = 386.168
-margin_right = 1399.5
-margin_bottom = 415.168
+margin_left = 1649.22
+margin_top = 385.03
+margin_right = 1769.22
+margin_bottom = 414.03
 theme = ExtResource( 14 )
 custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0.689026, 0.724922, 0.828125, 1 )
@@ -116,6 +116,27 @@ text = "NOTES:
  - CONSERVE ENERGY
  - FIND GOLD
  - press tab"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CreditsLabel" type="Label" parent="."]
+margin_left = 44.2085
+margin_top = 33.3445
+margin_right = 389.208
+margin_bottom = 289.344
+theme = ExtResource( 14 )
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0.689026, 0.724922, 0.828125, 1 )
+text = "made by
+lajollagames.club
+
+creikey - Cameron
+game director
+
+Stving_artist - Lin
+artist"
+align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
