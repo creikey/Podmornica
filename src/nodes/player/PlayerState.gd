@@ -7,3 +7,4 @@ var health: float = 100.0
 var viewing_controls: bool = true
 var rotation: float = 0.0
 var vel: Vector2 = Vector2()
+var camera_shake_amount: float = 0.0

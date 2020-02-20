@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://nodes/player/submarine.png" type="Texture" id=1]
 [ext_resource path="res://nodes/player/Submarine.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://nodes/gui/GUI.tscn" type="PackedScene" id=4]
 [ext_resource path="res://logo.png" type="Texture" id=5]
 [ext_resource path="res://nodes/gold/Gold.png" type="Texture" id=6]
+[ext_resource path="res://Main.gd" type="Script" id=7]
 [ext_resource path="res://media/coral-sea.ogg" type="AudioStream" id=8]
 [ext_resource path="res://nodes/multiplayer/MultiPlayer.tscn" type="PackedScene" id=9]
 [ext_resource path="res://dumb-scripts/CanvasModulate.gd" type="Script" id=11]
@@ -222,6 +223,7 @@ tracks/1/keys = {
 }
 
 [node name="Main" type="Node2D"]
+script = ExtResource( 7 )
 
 [node name="Environment" type="Node2D" parent="."]
 
@@ -285,6 +287,8 @@ shadow_enabled = true
 shadow_gradient_length = 0.5
 shadow_filter = 1
 shadow_filter_smooth = 8.8
+
+[node name="ShakeTween" type="Tween" parent="Player"]
 
 [node name="UI" type="CanvasLayer" parent="."]
 

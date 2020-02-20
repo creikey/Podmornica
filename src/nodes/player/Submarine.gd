@@ -20,6 +20,7 @@ const max_vertical_velocity = 400.0
 
 var accel: Vector2 = Vector2()
 var vel: Vector2 = Vector2()
+var shake: float = 0.0
 
 func _ready():
 	player_state.controls = Vector2()
@@ -42,6 +43,8 @@ func _process(delta):
 	
 	player_state.energy += cur_energy_rate*delta
 	player_state.energy = clamp(player_state.energy, 0.0, 100.0)
+	
+	player_state.camera_shake_amount = shake
 
 func _physics_process(delta):
 	
@@ -71,9 +74,11 @@ func _physics_process(delta):
 		var intensity: float = get_slide_collision(i).travel.length()
 		if intensity >= 1.2 and $LastCrashTimer.is_stopped():
 			$LastCrashTimer.start()
+			$ShakeTween.interpolate_property(self, "shake", 1.0, 0.0, 1.5, Tween.TRANS_CUBIC, Tween.EASE_IN)
+			$ShakeTween.start()
 			
 			player_state.health -= intensity*5.0
-			
+				
 			vel = get_slide_collision(i).normal.normalized()*vel.length()
 			
 			$MultiPlayer.play(crashes[randi()%crashes.size()])
