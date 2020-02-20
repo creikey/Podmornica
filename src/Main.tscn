@@ -254,7 +254,9 @@ texture = ExtResource( 6 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/WinningGold"]
 shape = SubResource( 20 )
 
-[node name="Player" type="KinematicBody2D" parent="."]
+[node name="Player" type="KinematicBody2D" parent="." groups=[
+"player",
+]]
 position = Vector2( 960, 540 )
 script = ExtResource( 2 )
 
