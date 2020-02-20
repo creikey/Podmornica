@@ -22,6 +22,13 @@ var accel: Vector2 = Vector2()
 var vel: Vector2 = Vector2()
 
 func _ready():
+	player_state.controls = Vector2()
+	player_state.rotation_controls = 0.0
+	player_state.energy = 100.0
+	player_state.health = 100.0
+	player_state.viewing_controls = true
+	player_state.rotation = 0.0
+	player_state.vel = Vector2()
 	randomize()
 
 func _process(delta):
@@ -57,6 +64,8 @@ func _physics_process(delta):
 
 	vel = move_and_slide(vel)
 
+	player_state.vel = vel
+
 	# crash detection
 	for i in range(get_slide_count()):
 		var intensity: float = get_slide_collision(i).travel.length()
@@ -71,3 +80,6 @@ func _physics_process(delta):
 
 	vel.x = clamp(vel.x, -max_horizontal_velocity, max_horizontal_velocity)
 	vel.y = clamp(vel.y, -max_vertical_velocity, max_vertical_velocity)
+	
+	if player_state.health <= 0.1:
+		get_tree().change_scene("res://Lose.tscn")
